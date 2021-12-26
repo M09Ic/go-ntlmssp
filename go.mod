@@ -1,8 +1,7 @@
-module github.com/JKme/go-ntlmssp
+module github.com/M09ic/go-ntlmssp
 
 go 1.13
 
 require (
-	github.com/eddieivan01/nic v0.3.1
 	golang.org/x/crypto v0.0.0-20200604202706-70a84ac30bf9
 )
