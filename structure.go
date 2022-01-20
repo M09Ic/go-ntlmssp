@@ -139,7 +139,7 @@ func ParseNegotiateFlags(ui uint32) *[32][2]string {
 	nf[0], nf[1], nf[2], nf[3] = nf[3], nf[2], nf[1], nf[0]
 	for i := 0; i < 4; i++ {
 		for j := 0; j < 8; j++ {
-			if (nf[i]>>(7-j))&1 == 1 {
+			if (nf[i]>>uint(7-j))&1 == 1 {
 				flags[i*8+j][1] = "1"
 			}
 		}
