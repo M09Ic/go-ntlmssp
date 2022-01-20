@@ -33,11 +33,11 @@ func bytes2Uint(bs []byte, endian byte) uint64 {
 	var u uint64
 	if endian == '>' {
 		for i := 0; i < len(bs); i++ {
-			u += uint64(bs[i]) << (8 * (len(bs) - i - 1))
+			u += uint64(bs[i]) << uint(8*(len(bs)-i-1))
 		}
 	} else {
 		for i := 0; i < len(bs); i++ {
-			u += uint64(bs[len(bs)-i-1]) << (8 * (len(bs) - i - 1))
+			u += uint64(bs[len(bs)-i-1]) << uint(8*(len(bs)-i-1))
 		}
 	}
 	return u
@@ -65,13 +65,13 @@ func bytes2StringUTF16(bs []byte) string {
 func padding(bs []byte) []byte {
 	output := make([]byte, 0, 8)
 	output = append(output, 1+(bs[0]>>1)<<1)
-	output = append(output, 1+((bs[0]&1)<<7)+((bs[1]&0b11111100)>>1))
-	output = append(output, 1+((bs[1]&0b11)<<6)+((bs[2]&0b11111000)>>2))
-	output = append(output, 1+((bs[2]&0b111)<<5)+((bs[3]&0b11110000)>>3))
-	output = append(output, 1+((bs[3]&0b1111)<<4)+((bs[4]&0b11100000)>>4))
-	output = append(output, 1+((bs[4]&0b11111)<<3)+((bs[5]&0b11000000)>>5))
-	output = append(output, 1+((bs[5]&0b111111)<<2)+((bs[6]&0b10000000)>>6))
-	output = append(output, 1+(bs[6]&0b1111111)<<1)
+	output = append(output, 1+((bs[0]&1)<<7)+((bs[1]&0xfc)>>1))
+	output = append(output, 1+((bs[1]&0x3)<<6)+((bs[2]&0xf8)>>2))
+	output = append(output, 1+((bs[2]&0x7)<<5)+((bs[3]&0xf0)>>3))
+	output = append(output, 1+((bs[3]&0xf)<<4)+((bs[4]&0xe0)>>4))
+	output = append(output, 1+((bs[4]&0x1f)<<3)+((bs[5]&0xc0)>>5))
+	output = append(output, 1+((bs[5]&0x3f)<<2)+((bs[6]&0x80)>>6))
+	output = append(output, 1+(bs[6]&0x7f)<<1)
 	return output
 }
 
