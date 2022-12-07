@@ -117,6 +117,10 @@ var windowsVer = map[string]string{
 }
 
 func NTLMInfo(ret []byte) map[string]interface{} {
+	defer func() {
+		if err := recover(); err != nil {
+		}
+	}()
 	flags := NewChallengeMsg(ret)
 	tinfo := ParseAVPair(flags.TargetInfo())
 	delete(tinfo, "MsvAvTimestamp")

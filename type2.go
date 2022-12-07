@@ -137,7 +137,7 @@ func NewChallengeMsg(bs []byte) *ChallengeMsg {
 	return &cm
 }
 
-func (cm ChallengeMsg) TargetName() string {
+func (cm *ChallengeMsg) TargetName() string {
 	if cm.TargetNameLen == 0 {
 		return ""
 	}
@@ -169,7 +169,7 @@ func (cm *ChallengeMsg) SetTargetName(tname []byte) {
 	cm.offset += uint32(cm.TargetNameLen)
 }
 
-func (cm ChallengeMsg) TargetInfo() []byte {
+func (cm *ChallengeMsg) TargetInfo() []byte {
 	if cm.TargetInfoLen == 0 {
 		return nil
 	}
@@ -209,7 +209,7 @@ func (cm *ChallengeMsg) SetTargetInfo(tinfo map[string]interface{}) {
 	cm.offset += uint32(cm.TargetInfoLen)
 }
 
-func (cm ChallengeMsg) Version() []byte {
+func (cm *ChallengeMsg) Version() []byte {
 	if cm.NegotiateFlags&NEGOTIATE_VERSION != 0 {
 		return cm.Payload[:8]
 	} else {
