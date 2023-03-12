@@ -183,7 +183,7 @@ func (cm *ChallengeMsg) SetTargetInfo(tinfo map[string]interface{}) {
 
 	cm.NegotiateFlags |= NEGOTIATE_TARGET_INFO
 
-	bs := []byte{}
+	var bs []byte
 	for k, v := range tinfo {
 		if avIdsRev[k] == 0 {
 			continue

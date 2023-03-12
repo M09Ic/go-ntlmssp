@@ -113,6 +113,7 @@ var windowsVer = map[string]string{
 	"10.0.19042": "10 20H2/Server20H2",
 	"10.0.19043": "10 21H2",
 	"10.0.20348": "Server2022",
+	"10.0.22621": "11",
 	"11.0.22000": "11",
 }
 
@@ -128,6 +129,6 @@ func NTLMInfo(ret []byte) map[string]interface{} {
 	version := ret[offset_version : offset_version+8]
 	ver, _ := ReadVersionStruct(version)
 	build := fmt.Sprintf("%d.%d.%d", ver.ProductMajorVersion, ver.ProductMinorVersion, ver.ProductBuild)
-	tinfo["Version"] = fmt.Sprintf("Windows %s_(%s)", windowsVer[build], build)
+	tinfo["Version"] = fmt.Sprintf("Windows %s(%s)", windowsVer[build], build)
 	return tinfo
 }
